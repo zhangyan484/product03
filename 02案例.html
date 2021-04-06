@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="lib/jquery.js"></script>
+    <script src="lib/template-web.js"></script>
+</head>
+<body>
+    <div id="div1"></div>
+    <script type="text/html" id="tmp">
+    <div >姓名:{{name}}</div>
+    <div >年龄:{{age}}</div>
+    <div >性别:{{gender}}</div>
+    <div >住址:{{address}}</div>
+   
+    </script>
+    <script>
+      function template(id,data){
+          var str = document.getElementById(id).innerHTML;
+          var parrent = /{{\s*([a-zA-Z]+)\s*}}/;
+          var result = null;
+          while(result=parrent.exec(str)){
+              str=str.replace(result[0],data[result[1]])
+          }
+          return str
+      }
+    </script>
+    <script>
+      var data = {name:"张三",age:28,gender:"男",address:"北京顺义"}
+      var strhtml =  template("tmp",data);
+      console.log(strhtml)
+    //   document.getElementById("div1").innerHTML=strhtml
+    $("#div1").html(strhtml)
+
+
+    </script>
+</body>
+</html>
